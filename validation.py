@@ -2,32 +2,32 @@ from datetime import datetime
 
 
 def validate_task_title(title):
-    if not title or not title.strip():
+    if len(title) == 0:
         raise ValueError("Title cannot be empty.")
-    if len(title.strip()) < 3:
+    if len(title) < 3:
         raise ValueError("Title must be at least 3 characters long.")
-    if len(title.strip()) > 100:
+    if len(title) > 100:
         raise ValueError("Title cannot exceed 100 characters.")
-    return title.strip()
+    return title
 
 
 def validate_task_description(description):
-    if not description or not description.strip():
+    if len(description) == 0:
         raise ValueError("Description cannot be empty.")
-    if len(description.strip()) < 5:
+    if len(description) < 5:
         raise ValueError("Description must be at least 5 characters long.")
-    if len(description.strip()) > 500:
+    if len(description) > 500:
         raise ValueError("Description cannot exceed 500 characters.")
-    return description.strip()
+    return description
 
 
 def validate_due_date(due_date):
-    if not due_date or not due_date.strip():
+    if len(due_date) == 0:
         raise ValueError("Due date cannot be empty.")
-    if len(due_date.strip()) != 10:
+    if len(due_date) != 10:
         raise ValueError("Due date must be in YYYY-MM-DD format.")
     try:
-        datetime.strptime(due_date.strip(), "%Y-%m-%d")
+        datetime.strptime(due_date, "%Y-%m-%d")
     except ValueError:
         raise ValueError("Due date must be in YYYY-MM-DD format.")
-    return due_date.strip()
+    return due_date
