@@ -24,6 +24,8 @@ def validate_task_description(description):
 def validate_due_date(due_date):
     if not due_date or not due_date.strip():
         raise ValueError("Due date cannot be empty.")
+    if len(due_date.strip()) != 10:
+        raise ValueError("Due date must be in YYYY-MM-DD format.")
     try:
         datetime.strptime(due_date.strip(), "%Y-%m-%d")
     except ValueError:

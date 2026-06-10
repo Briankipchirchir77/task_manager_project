@@ -35,9 +35,21 @@ def add_task(title, description, due_date):
     return task
 
 
-def mark_task_as_complete(title):
+def mark_task_as_complete(title_or_index):
+    title_or_index = title_or_index.strip()
+    if title_or_index.isdigit():
+        index = int(title_or_index) - 1
+        pending = [task for task in tasks if not task["completed"]]
+        if 0 <= index < len(pending):
+            task = pending[index]
+            task["completed"] = True
+            print("Task marked as complete!")
+            return True
+        print(f"Task '{title_or_index}' not found.")
+        return False
+
     for task in tasks:
-        if task["title"].lower() == title.lower():
+        if task["title"].lower() == title_or_index.lower():
             if task["completed"]:
                 print("Task is already complete.")
             else:
@@ -45,7 +57,7 @@ def mark_task_as_complete(title):
                 print("Task marked as complete!")
             return True
 
-    print(f"Task '{title}' not found.")
+    print(f"Task '{title_or_index}' not found.")
     return False
 
 
@@ -68,11 +80,14 @@ def calculate_progress(tasks_list=None):
         tasks_list = tasks
 
     if not tasks_list:
-        print("No tasks found.")
+        if tasks_list is tasks:
+            print("No tasks found.")
         return 0
 
     completed = len([task for task in tasks_list if task["completed"]])
     total = len(tasks_list)
     percentage = (completed / total) * 100
-    print(f"Progress: {completed}/{total} tasks completed ({percentage:.1f}%)")
+
+    if tasks_list is tasks:
+        print(f"Progress: {completed}/{total} tasks completed ({percentage:.1f}%)")
     return percentage

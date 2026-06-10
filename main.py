@@ -39,7 +39,7 @@ def handle_add_task():
 def handle_mark_complete():
     """Handle user input for marking a task complete."""
     print("\n--- Mark Task as Complete ---")
-    title = input("Enter the title of the task to complete: ")
+    title = input("Enter the title or number of the task to complete: ")
     mark_task_as_complete(title)
 
 
