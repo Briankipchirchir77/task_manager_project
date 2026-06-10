@@ -61,8 +61,11 @@ def view_pending_tasks():
     return pending
 
 
-def calculate_progress():
+def calculate_progress(tasks=None):
     """Calculate and display the percentage of completed tasks."""
+    if tasks is None:
+        tasks = globals()["tasks"]
+
     if not tasks:
         print("\n⚠️  No tasks found. Add some tasks first.")
         return 0
@@ -73,7 +76,6 @@ def calculate_progress():
 
     print(f"\n📊 Progress: {completed}/{total} tasks completed ({percentage:.1f}%)")
 
-    # Visual progress bar
     bar_length = 30
     filled = int(bar_length * completed / total)
     bar = "█" * filled + "░" * (bar_length - filled)

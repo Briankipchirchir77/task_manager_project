@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 def validate_task_title(title):
     """Validate task title is not empty and within length limits."""
     if not title or not title.strip():
